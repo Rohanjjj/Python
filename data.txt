@@ -1,0 +1,49 @@
+Name=Rohan
+rollno=2023123   2023-11-23 21:07:46.153691
+345   2023-11-23 21:07:52.004787
+import tkinter as tk
+from tkinter import messagebox
+
+class VotingSystem:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Voting System")
+        self.master.geometry("400x400")
+        self.master.resizable(False, False)
+
+        self.candidates = ["Candidate 1", "Candidate 2", "Candidate 3"]
+        self.votes = [0, 0, 0]
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.label = tk.Label(self.master, text="Please select a candidate:")
+        self.label.pack(pady=10)
+
+        for i in range(len(self.candidates)):
+            self.button = tk.Button(self.master, text=self.candidates[i], command=lambda i=i: self.vote(i))
+            self.button.pack(pady=5)
+
+        self.results_button = tk.Button(self.master, text="Show Results", command=self.show_results)
+        self.results_button.pack(pady=10)
+
+    def vote(self, candidate):
+        self.votes[candidate] += 1
+        messagebox.showinfo("Success", "Your vote has been recorded.")
+
+    def show_results(self):
+        total_votes = sum(self.votes)
+        if total_votes == 0:
+            messagebox.showwarning("Warning", "No votes have been cast yet.")
+        else:
+            results = ""
+            for i in range(len(self.candidates)):
+                percentage = round((self.votes[i] / total_votes) * 100, 2)
+                results += f"{self.candidates[i]}: {self.votes[i]} votes ({percentage}%)\n"
+            messagebox.showinfo("Results", results)
+
+root = tk.Tk()
+app = VotingSystem(root)
+root.mainloop()123   2023-12-31 10:08:16.897359
+456   2023-12-31 10:08:21.247552
+123   2024-06-27 18:47:52.283371
